@@ -13,8 +13,13 @@
 
 <script>
 import HelloWorld from '@/components/HelloWorld'
-const globalEvent = weex.requireModule('globalEvent')
+
 const testModule = weex.requireModule('ToastModule')
+const globalEvent = weex.requireModule('globalEvent')
+globalEvent.addEventListener('geolocation', function (e) {
+  testModule.log(e.text)
+})
+
 export default {
   name: 'App',
   components: {
@@ -25,16 +30,10 @@ export default {
       logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
     }
   },
-
   methods: {
     toast: function () {
       testModule.showToast('hello android toast', function (s) {
         testModule.log(s)
-      })
-    },
-    addGlobalObserver () {
-      globalEvent.addEventListener('main', function (e) {
-        testModule.log('ssssss')
       })
     }
   }

@@ -6,10 +6,6 @@ import android.widget.Toast;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 import com.taobao.weex.common.WXModule;
-import com.taobao.weex.common.WXModuleAnno;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ToastModule extends WXModule {
     public static final String TAG = ToastModule.class.getSimpleName();
