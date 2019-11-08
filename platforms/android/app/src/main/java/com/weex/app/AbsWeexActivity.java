@@ -224,6 +224,7 @@ import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
+import com.weex.app.util.ActivityStackManager;
 import com.weex.app.util.CommonUtils;
 
 import java.util.HashMap;
@@ -244,6 +245,7 @@ public abstract class AbsWeexActivity extends AppCompatActivity implements IWXRe
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActivityStackManager.getInstance().pushActivity(this);
     createWeexInstance();
     mInstance.onActivityCreate();
     registerBroadcastReceiver(mBroadcastReceiver, null);
@@ -342,6 +344,7 @@ public abstract class AbsWeexActivity extends AppCompatActivity implements IWXRe
   @Override
   public void onDestroy() {
     super.onDestroy();
+    ActivityStackManager.getInstance().popActivity(this);
     if (mInstance != null) {
       mInstance.onActivityDestroy();
     }

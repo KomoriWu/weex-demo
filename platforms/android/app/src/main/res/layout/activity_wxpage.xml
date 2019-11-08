@@ -43,7 +43,7 @@
         android:id="@+id/btn_push"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="push" />
+        android:text="@string/page_refresh" />
 </FrameLayout>
 
 

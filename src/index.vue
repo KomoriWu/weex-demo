@@ -3,11 +3,12 @@
         <img :src="logo" class="logo"/>
         <text class="greeting">The environment is ready!</text>
         <HelloWorld/>
-        <!--        <a href="/dist/RecycleList.js">-->
-        <div @click="toast">
+<!--        <a href="http://www.baidu.com">-->
+<!--            <text class="jump">ajump</text>-->
+<!--        </a>-->
+        <div @click="jump">
             <text class="jump">jump</text>
         </div>
-        <!--        </a>-->
     </div>
 </template>
 
@@ -16,6 +17,10 @@ import HelloWorld from '@/components/HelloWorld'
 
 const testModule = weex.requireModule('ToastModule')
 const globalEvent = weex.requireModule('globalEvent')
+const navigator = weex.requireModule('navigator')
+const modal = weex.requireModule('modal')
+const jumpModule = weex.requireModule('JumpModule')
+
 globalEvent.addEventListener('geolocation', function (e) {
   testModule.log(e.text)
 })
@@ -34,6 +39,17 @@ export default {
     toast: function () {
       testModule.showToast('hello android toast', function (s) {
         testModule.log(s)
+      })
+    },
+    jump: function () {
+      modal.toast({
+        message: 'jump',
+        duration: 0.1
+      })
+      // jumpModule.jump('RecycleList.js')
+      navigator.push({
+        url: 'wz_jump://10.168.12.146:8081/dist/RecycleList.js',
+        animated: 'true'
       })
     }
   }

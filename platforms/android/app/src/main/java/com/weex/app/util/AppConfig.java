@@ -8,6 +8,7 @@ import android.content.Context;
  */
 public class AppConfig {
   private static final String TAG = "AppConfig";
+  public static final String BASE_URL="http://10.168.12.146:8081/dist/";
   private static AppPreferences sPreferences = new AppPreferences();
 
   public static void init(Context context) {
@@ -18,7 +19,7 @@ public class AppConfig {
 //    if (isLaunchLocally()) {
 //      return "file://assets/RecycleList.js";
 //    }
-    return "http://10.168.12.146:8081/dist/index.js";
+    return BASE_URL+"index.js";
   }
 
   public static Boolean isLaunchLocally() {

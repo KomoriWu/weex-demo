@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.taobao.weex.common.WXRenderStrategy;
+import com.taobao.weex.devtools.common.LogUtil;
 import com.weex.app.hotreload.HotReloadManager;
 import com.weex.app.util.AppConfig;
 import com.weex.app.util.Constants;
@@ -57,14 +59,18 @@ public class WXPageActivity extends AbsWeexActivity implements
         mContainer = (ViewGroup) findViewById(R.id.container);
         mProgressBar = (ProgressBar) findViewById(R.id.progress);
         mTipView = (TextView) findViewById(R.id.index_tip);
-
         Intent intent = getIntent();
         Uri uri = intent.getData();
         String from = intent.getStringExtra("from");
         mFromSplash = "splash".equals(from);
-
+        String jsName = intent.getStringExtra("name");
+        if (!TextUtils.isEmpty(jsName)) {
+            mUri = Uri.parse(AppConfig.BASE_URL + intent.getStringExtra("name"));
+        }
         if (uri == null) {
             uri = Uri.parse("{}");
+        }else {
+            mUri= Uri.parse(uri.toString().replace("wz_jump","http"));
         }
         if (uri != null) {
             try {
@@ -129,9 +135,11 @@ public class WXPageActivity extends AbsWeexActivity implements
         findViewById(R.id.btn_push).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> params = new HashMap<>();
-                params.put("text", "主动推过来的");
-                mInstance.fireGlobalEventCallback("geolocation", params);
+//                Map<String, Object> params = new HashMap<>();
+//                params.put("text", "主动推过来的");
+//                mInstance.fireGlobalEventCallback("geolocation", params);
+                createWeexInstance();
+                renderPage();
             }
         });
     }
